@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pesto-ecommerce-app
+spec:
+  replicas: 3  # Set the desired number of replicas for high availability
+  selector:
+    matchLabels:
+      app: pesto-ecommerce-app
+  template:
+    metadata:
+      labels:
+        app: pesto-ecommerce-app
+    spec:
+      containers:
+      - name: pesto-ecommerce-app
+        image: your-docker-registry/pesto-ecommerce-app:latest
+        ports:
+        - containerPort: 8080
