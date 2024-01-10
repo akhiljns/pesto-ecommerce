@@ -75,11 +75,30 @@ The APIs in this project are documented using Swagger. To explore and test the e
 - Open your browser and navigate to [Swagger UI](http://localhost:8080/swagger-ui.html).
 - You will be presented with an interactive Swagger documentation that lists all the available endpoints and provides a convenient way to test them.
 
-## Clustering and High Availability
 
-Explain how the system achieves clustering and high availability.
+## Clustering and High Availability with Minikube
 
-## Kubernetes Deployment
+### Step 1: Install and Set Up Minikube
 
-If applicable, provide instructions on how to deploy the system on Kubernetes.
+1. **Install Minikube:** Follow the instructions for your operating system in the [official documentation](https://minikube.sigs.k8s.io/docs/start/).
+
+2. **Start Minikube:** Run `minikube start` to launch a local Kubernetes cluster.
+
+### Step 2: Deploy to Kubernetes
+
+```bash
+kubectl apply -f kubernetes/deployment.yaml
+kubectl apply -f kubernetes/service.yaml
+```
+
+### Step 3 : check pods
+
+```bash
+kubectl get pods -o wide
+```
+### Step 4 : Access the service 
+
+Ecommerce App: http://<MINIKUBE_IP>:<PORT>/swagger-ui.html
+
+The services are now running in a clustered environment. Demonstrate high availability by checking the services' availability even if one node/container goes down. Explore the Swagger UI for API documentation and interact with the ecommerce system.
 
