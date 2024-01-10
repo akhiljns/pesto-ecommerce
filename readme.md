@@ -10,6 +10,7 @@ This project is an ecommerce backend developed with Spring Boot, providing vario
 - [Endpoints](#endpoints)
 - [Clustering and High Availability](#clustering-and-high-availability)
 - [Kubernetes Deployment](#kubernetes-deployment)
+- [Troubleshooting](#debugging-and-troubleshooting)
 
 ## Prerequisites
 
@@ -98,7 +99,25 @@ kubectl get pods -o wide
 ```
 ### Step 4 : Access the service 
 
-Ecommerce App: http://<MINIKUBE_IP>:<PORT>/swagger-ui.html
+```bash
+kubectl.exe get services
+```
+
+Ecommerce App: http://<MINIKUBE_IP>:<PORT>/swagger-ui.html#/
+
+example - http://127.0.0.1:57412/swagger-ui.html#/
 
 The services are now running in a clustered environment. Demonstrate high availability by checking the services' availability even if one node/container goes down. Explore the Swagger UI for API documentation and interact with the ecommerce system.
 
+
+## Debugging and Troubleshooting
+
+It is possible that the docker image built locally is not accessible to minikube and if this deployment is done on minikube then the local docker registry should be accesible since docker pull from registry is disabled
+
+in this case please run 
+
+```bash
+eval $(minikube docker-env)
+```
+
+- now re-build docker image and restart container, then reapply service and it will start working
