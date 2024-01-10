@@ -14,6 +14,8 @@ spec:
     spec:
       containers:
       - name: pesto-ecommerce-app
-        image: your-docker-registry/pesto-ecommerce-app:latest
+        image: pesto-ecommerce-app:latest
+        imagePullPolicy: Never  # Use local image if available, otherwise pull from registry
         ports:
-        - containerPort: 8080
+          - containerPort: 8080
+
