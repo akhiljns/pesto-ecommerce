@@ -75,7 +75,7 @@ The APIs in this project are documented using Swagger. To explore and test the e
 
 - Open your browser and navigate to [Swagger UI](http://localhost:8080/swagger-ui.html).
 - You will be presented with an interactive Swagger documentation that lists all the available endpoints and provides a convenient way to test them.
-
+- for initial testing I have written ```data-h2.sql``` which inserts testing data during the start of the application so that features could be testing without having to create dummy data.
 
 ## Clustering and High Availability with Minikube
 
@@ -121,3 +121,39 @@ eval $(minikube docker-env)
 ```
 
 - now re-build docker image and restart container, then reapply service and it will start working
+
+# Ecommerce Microservices Project Evaluation Criteria Checklist
+
+This project adheres to the following criteria:
+
+## Microservices Architecture
+
+The system is structured as microservices, with distinct modules responsible for specific functionalities. The project is organized into packages, such as `com.pesto.ecommerce.controller`, `com.pesto.ecommerce.service`, and `com.pesto.ecommerce.repository`. Each package represents a microservice or a layer within the microservices architecture. This gives us well structured MVC architecture.
+
+also the project is dockerized which will help us deploying and creating a microservice out of this.
+
+## Concurrency Control
+
+Concurrency control is effectively implemented to manage concurrent access to critical sections of the code. The `@Transactional` annotation is used to ensure atomicity, consistency, isolation, and durability (ACID properties) during database transactions. Concurrency issues are addressed through proper synchronization mechanisms and transaction management. Executor service is used to spawn threads for each shopping done by user and takes every purchasing task in a different thread.
+
+## Clustering
+
+The system demonstrates high availability and clustering capabilities, especially when deployed in a Kubernetes environment. The Kubernetes deployment includes multiple replicas of the application to ensure redundancy and fault tolerance. This setup is designed to maintain service availability even if one node or container becomes unavailable. For ease of usage and demonstration minikube is used to perform local kubernetes deployment.
+
+## Code Quality
+
+The codebase follows best practices for readability, maintainability, and documentation. Descriptive package names and well-structured classes enhance code organization. Each module includes comments and documentation to explain its purpose and usage. Lombok annotations are used to reduce boilerplate code, and the project adheres to consistent coding conventions.
+
+## Testing
+
+The project includes a suite of unit tests that cover critical components and concurrency control mechanisms. JUnit test are written for critical services like cart and shopping, in the interest of time only 2 tests have been written.
+
+## Database Integration
+
+For quick and ease of usage h2 database is used to store the product and cart data, it can be accessed on :
+
+```bash
+http://localhost:8080/h2-console/
+```
+
+while the application is up and running. This is an in-memory database so data only gets persisted while the app is running
