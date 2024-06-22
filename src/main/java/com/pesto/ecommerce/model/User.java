@@ -1,6 +1,7 @@
 
-
 package com.pesto.ecommerce.model;
+
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,4 +35,7 @@ public class User {
 
     @Email
     private @NotNull String email;
+
+    private @NotNull String password;
+    private List<Role> roles;
 }
